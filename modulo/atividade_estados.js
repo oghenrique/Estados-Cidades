@@ -4,21 +4,22 @@
  * Data: 20/10/2023
  * Versão: 1.0
 ************************************************************************************************/
+var estadosBrasil = require('./estados_cidades.js')
 
-var atividadeEstados = require('./estados_cidades.js')
-
-const getListaDeEstados = () => {
-    let estados = pais.estadoCidades.estados
+const getListaDeEstados = function() {
+    let estados = estadosBrasil.estadosCidades.estados
     let siglas = {}
     let uf = []
 
-    estados.forEach(function(estados){
-    uf.push(estados.sigla)
-})
+    estados.forEach(function(estado) {
+        uf.push(estado.sigla)
+    })
 
     siglas.uf = uf
-    siglas.quantidade = pais.estadoCidades.estados.length
+    siglas.quantidade = estadosBrasil.estadosCidades.estados.length
     console.log(siglas)
 
     return siglas
 }
+
+getListaDeEstados()
