@@ -22,8 +22,22 @@ const getListaDeEstados = function() {
     return siglas
 }
 
-const getDadosEstado = function(){
-    
+const getDadosEstado = function(siglaEstado){
+    let sigla = siglaEstado.toUpperCase()
+    let estados = estadosBrasil.estadosCidades.estados
+    let dadosEstado = {}
+
+    estados.forEach(function(estado){
+        if (estado.sigla.includes(sigla)){
+            dadosEstado.uf = estado.sigla
+            dadosEstado.descricao = estado.nome
+            dadosEstado.capital = estado.capital
+            dadosEstado.regiao = estado.regiao
+        }
+    })
+     console.log(dadosEstado)
+     return dadosEstado
 }
 
-getListaDeEstados()
+getDadosEstado('rj')
+// getListaDeEstados()
