@@ -22,4 +22,8 @@ const getListaDeEstados = function() {
     return siglas
 }
 
+const getDadosEstado = function(){
+    
+}
+
 getListaDeEstados()
