@@ -54,8 +54,11 @@ const getCapitalEstado = function(siglaEstado){
 
     return dadosCapital
 
-
 }
+
+const getEstadosRegiao
+
+
 
 
 console.log(getCapitalEstado('sp'))
