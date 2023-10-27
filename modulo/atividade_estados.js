@@ -39,5 +39,25 @@ const getDadosEstado = function(siglaEstado){
      return dadosEstado
 }
 
-getDadosEstado('rj')
+const getCapitalEstado = function(siglaEstado){
+    let sigla = siglaEstado.toUpperCase()
+    let capitais = estadosBrasil.estadosCidades.estados
+    let dadosCapital = {}
+
+    capitais.forEach(function (estadosBrasil){
+        if(estadosBrasil.sigla.includes(sigla)){
+            dadosCapital.uf = estadosBrasil.sigla
+            dadosCapital.descricao = estadosBrasil.nome
+            dadosCapital.capital = estadosBrasil.capital
+        }
+    })
+
+    return dadosCapital
+
+
+}
+
+
+console.log(getCapitalEstado('sp'))
+// getDadosEstado('ba')
 // getListaDeEstados()
