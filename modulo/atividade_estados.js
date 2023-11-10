@@ -17,7 +17,6 @@ const getListaDeEstados = function () {
 
     siglas.uf = uf
     siglas.quantidade = estadosBrasil.estadosCidades.estados.length
-    console.log(siglas)
 
     return siglas
 }
@@ -35,7 +34,6 @@ const getDadosEstado = function (siglaEstado) {
             dadosEstado.regiao = estado.regiao
         }
     })
-    console.log(dadosEstado)
     return dadosEstado
 }
 
@@ -133,17 +131,14 @@ const getCidades = function(siglaEstado){
     })
 
     estadoCidades.cidades = cidades
-    console.log(estadoCidades)
     return estadoCidades
 }
 
-
-
-
-
-console.log(getCapitalEstado('sp'))
-console.log(getEstadosRegiao('sudeste'))
-console.log(getCapitalPais())
-getCidades('ac')
-getDadosEstado('ba')
-getListaDeEstados()
+module.exports = {
+    getListaDeEstados,
+    getDadosEstado,
+    getCapitalEstado,
+    getEstadosRegiao,
+    getCapitalPais,
+    getCidades
+}
