@@ -46,6 +46,41 @@ app.get('/estados/sigla', cors(), async(request, response, next) =>{
     response.status(200)
 })
 
+//EndPoints: retorna os dados do estados filtrando pela sigla
+app.get('/estado/sigla/:uf', cors(), async(request, response, next) =>{
+    //Recebe uma variavel encaminhada por parametro na URL da requisição
+    let siglaEstado = request.params.uf
+    
+    let controleDadosEstado = require('./modulo/atividade_estados.js')
+    let dadosEstado = controleDadosEstado.getDadosEstado(siglaEstado)
+    
+    if(dadosEstado){
+        response.json(dadosEstado)
+        response.status(200)
+    }else{
+        response.status(404)
+        response.json({erro: "Não foi possivel encontrar um item"})
+    }
+    
+})
+
+//EndPoint: Retorna os dados da Capital fitrando pela sigla
+app.get('/capital/estado', cors(), async(request, response, next) =>{
+    //Recebe parametros via query, que são variaveis encaminhadas na URL da requisição (?uf=SP)
+    let siglaEstado = request.query.uf
+
+    let controleDadosCapital = require('./modulo/atividade_estados.js')
+    let dadosCapital = controleDadosCapital.getCapitalEstado(siglaEstado)
+
+    if(dadosCapital){
+        response.json(dadosCapital)
+        response.status(200)
+    }else{
+        response.status(404)
+        response.json({erro: "Não foi possivel encontrar um item"})
+    }
+})
+
 //Executa a API e faz ela ficar aguardando requisições
 app.listen(8080, function(){
 console.log('É NADA, falta só as requisições')

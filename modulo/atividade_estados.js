@@ -25,6 +25,7 @@ const getDadosEstado = function (siglaEstado) {
     let sigla = siglaEstado.toUpperCase()
     let estados = estadosBrasil.estadosCidades.estados
     let dadosEstado = {}
+    let status = false
 
     estados.forEach(function (estado) {
         if (estado.sigla.includes(sigla)) {
@@ -32,25 +33,36 @@ const getDadosEstado = function (siglaEstado) {
             dadosEstado.descricao = estado.nome
             dadosEstado.capital = estado.capital
             dadosEstado.regiao = estado.regiao
+            status = true
         }
     })
-    return dadosEstado
+
+    if (status)
+        return dadosEstado
+    else
+        return false
+
 }
 
 const getCapitalEstado = function (siglaEstado) {
     let sigla = siglaEstado.toUpperCase()
     let capitais = estadosBrasil.estadosCidades.estados
     let dadosCapital = {}
+    let status = false
 
     capitais.forEach(function (estadosBrasil) {
         if (estadosBrasil.sigla.includes(sigla)) {
             dadosCapital.uf = estadosBrasil.sigla
             dadosCapital.descricao = estadosBrasil.nome
             dadosCapital.capital = estadosBrasil.capital
+            status = true
         }
     })
 
-    return dadosCapital
+    if (status)
+        return dadosCapital
+    else
+        return false
 
 }
 
@@ -104,12 +116,12 @@ const getCapitalPais = function () {
     })
 
     informacoesCapitaisPais.capitais = listaCapitais
-    
+
     return informacoesCapitaisPais
 }
 
 
-const getCidades = function(siglaEstado){
+const getCidades = function (siglaEstado) {
 
     let estados = estadosBrasil.estadosCidades.estados
 
@@ -118,13 +130,13 @@ const getCidades = function(siglaEstado){
     let estadoCidades = {}
     let cidades = []
 
-    estados.forEach(function(estado){
-        if(estado.sigla.toUpperCase().includes(uf)){
+    estados.forEach(function (estado) {
+        if (estado.sigla.toUpperCase().includes(uf)) {
             estadoCidades.uf = estado.sigla
             estadoCidades.descricao = estado.nome
             estadoCidades.quantidade_cidades = estado.cidades.length
 
-            estado.cidades.forEach(function(cidade) {
+            estado.cidades.forEach(function (cidade) {
                 cidades.push(cidade.nome)
             })
         }
