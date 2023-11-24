@@ -64,7 +64,7 @@ app.get('/estado/sigla/:uf', cors(), async(request, response, next) =>{
     
 })
 
-//EndPoint: Retorna os dados da Capital fitrando pela sigla
+//EndPoints: Retorna os dados da Capital fitrando pela sigla
 app.get('/capital/estado', cors(), async(request, response, next) =>{
     //Recebe parametros via query, que são variaveis encaminhadas na URL da requisição (?uf=SP)
     let siglaEstado = request.query.uf
@@ -81,7 +81,60 @@ app.get('/capital/estado', cors(), async(request, response, next) =>{
     }
 })
 
-//Executa a API e faz ela ficar aguardando requisições
+//EndPoints: Retorna os estados de uma região filtrando pelo nome da região
+app.get('/estados/regiao/:regiao', cors(), async (request, response, next) => {
+
+    let regiao = request.params.regiao
+    let controleDadosRegiao = require('./modulo/atividade_estados.js')
+
+    let dadosRegiao = controleDadosRegiao.getEstadosRegiao(regiao)
+    
+    if(dadosRegiao){
+        response.json(dadosRegiao)
+        response.status(200)
+    }else{
+        response.status(404)
+        response.json({erro: "Não foi possivel encontrar um item"})
+    }
+
+})
+
+// EndPoints: Retorna os estados que já foram capitais do Brasil
+app.get('/capitais', cors(), async (request, response, next) => {
+
+    let capitais = request.params.capitais
+    let controleCapitais = require('./modulo/atividade_estados.js')
+
+    let dadosCapitais = controleCapitais.getCapitalPais(capitais)
+
+    if(dadosCapitais){
+        response.json(dadosCapitais)
+        response.status(200)
+    }else{
+        response.status(404)
+        response.json({erro: "Não foi possivel encontrar um item"})
+    }
+    
+})
+
+//Endpoints: Retorna as cidades de um estado pela sigla
+app.get('/estado/cidades/:sigla', cors(), async (request, response, next) => {
+
+    let siglaEstado = request.params.sigla
+    let controleCidades = require('./modulo/atividade_estados.js')
+
+    let dadosCidades = controleCidades.getCidades(siglaEstado)
+
+    if(dadosCidades){
+        response.json(dadosCidades)
+        response.status(200)
+    }else{
+        response.status(404)
+        response.json({erro: "Não foi possivel encontrar um item"})
+    }
+    
+})
+
 app.listen(8080, function(){
-console.log('É NADA, falta só as requisições')
+console.log('falta só as requisições')
 })
